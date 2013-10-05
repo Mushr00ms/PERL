@@ -23,7 +23,7 @@ if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0)
 
 my ($number_column, $length_column_string, $char_buffer, $column, $column_hex) = ($ARGV[0],$ARGV[1],0,0,0);
 my (@columns, @columns_hex) = ();
-my @charset = qw("A Z E R T Y U I O P Q S D F G H J K L M W X C V B N 1 2 3 4 5 6 7 8 9 0 a z e r t y u i o p q s d f g h j k l m w x c v b n");
+my @charset = qw(A Z E R T Y U I O P Q S D F G H J K L M W X C V B N 1 2 3 4 5 6 7 8 9 0 a z e r t y u i o p q s d f g h j k l m w x c v b n);
 
 for(my $p = 1; $p <= $number_column; $p++)
 {
