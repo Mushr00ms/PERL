@@ -1,5 +1,20 @@
 #!/usr/bin/perl
 
+
+#################################################################################################################################
+#																																#
+#	What does this script : This script will help you with SQli that hide the vulnerable column in the source.                  #
+#	Developper : Crown																											#
+#	Usage : ./payload.pl <number of column> <size of column name>																#
+# 																																#
+#	Exemple : ./payload.pl 5 6                                                                                                  #
+#	Output :																													#
+#																																#
+#	Payload with 5 column(s) (6 chars) : 'uBcI-1','MkPC-2','1xes-3','Bczk-4','sEb3-5'											#
+#	Payload (hex mode) with 5 column(s) (6 chars) : 0x754263492d31,0x4d6b50432d32,0x317865732d33,0x42637a6b2d34,0x734562332d35	#
+#																																#
+#################################################################################################################################	 
+
 use strict;
 use warnings;
 
