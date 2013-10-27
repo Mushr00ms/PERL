@@ -34,7 +34,7 @@ while(<IFCONFIG>)
 	chomp $_;
 	push(@ifconfig,$_);
 }	
-
+ 
 
 foreach my $y (@ifconfig) 
 {
