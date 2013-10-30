@@ -13,7 +13,7 @@ if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0 || defined($ARGV[2]) == 0)
 	exit(1); 
 }
 
-my ($i,$dev,$status_connection) = (0,0,0);
+my ($i,$dev,$status_connection) = (0,0,$ARGV[2]);
 
 my $ip_attack = 0;
 
