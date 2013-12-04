@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 																																
-#	What does this script : This script will help you with SQli that hide the vulnerable column in the source.                  
-#	Developper : Crown - 05/09/13 ()																								
+#	What the script does : This script will help you with SQli that hide the vulnerable column in the source.                  
+#	Developper : Crown - 05/09/13 																								
 #	Usage : ./payload.pl <number of column> <size of column name>																
 # 																																
 #	Exemple : ./payload.pl 5 6                                                                                                  
