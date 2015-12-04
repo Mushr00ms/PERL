@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
 																																
-#	What the script does ? : This script will help you with SQli that hide the vulnerable column in the source.                  
+#	What does the script ? : This script will help you with SQli that hides the vulnerable column in the page source code.                  
 #	Developper : Crown - 05/09/13 - Last update 09/06/14 																								
-#	Usage : ./payload.pl <number of column> <size of column name> <target url> <ending delimiter>														
+#	Usage : ./payload.pl <number of columns> <size of columns name> <target url> <ending delimiter>														
 # 																																
 #	Exemple : ./payload.pl 6 4  "http://www.site.com/xxxx.php?xx=x" "xx"                                                                                                
 #	Output :																													
@@ -24,7 +24,7 @@ use LWP::Simple;
 
 if(defined($ARGV[0]) == 0 || defined($ARGV[1]) == 0 || defined($ARGV[2]) == 0  || defined($ARGV[3]) == 0 ) 
 {
-	print("Usage : $0 <number of column> <size of column name> <target url> <ending delimiter>\n"); 
+	print("Usage : $0 <number of columns> <size of columns name> <target url> <ending delimiter>\n"); 
 	exit(1); 
 }
 
