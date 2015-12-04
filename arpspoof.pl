@@ -84,7 +84,7 @@ foreach my $x (@list_addr)
 
 if($addr_mac_dest_victim eq '0')
 {
-	print("MAC victim cannot be retrieved, you should check the validity of target IP.\n");
+	print("MAC victim cannot be retrieved, you should check the validity of the target IP.\n");
 	restore();
 }
 
